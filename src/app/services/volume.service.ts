@@ -16,6 +16,14 @@ export class VolumeService {
         );
     }
 
+    public getVolumes(query: string, callback: (any) => any) {
+        this.volumeDataSer.getVolumeDataArray(query).subscribe(
+            (data: VolumeSearchResultData) => callback(
+                this.getVolumeArrayFromData(data)
+            )
+        );
+    }
+
     public getVolumeFromData(data: VolumeData): Volume {
         return new Volume(
             data.id,
