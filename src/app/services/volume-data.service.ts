@@ -16,6 +16,6 @@ export class VolumeDataService {
     }
 
     public getVolumeDataArray(parameters: string): Observable<VolumeSearchResultData> {
-        return this.api.get<VolumeSearchResultData>(this.resourcePath + "/q?=" + parameters)
+        return this.api.get<VolumeSearchResultData>(this.resourcePath + "?q=" + parameters)
     }
 }

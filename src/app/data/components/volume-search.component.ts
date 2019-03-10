@@ -13,7 +13,8 @@ import { Volume } from 'src/app/models/volume.model';
     <button mat-button (click)="search()">Search!</button>
     <mat-grid-list cols="4">
         <volume
-            *ngFor="let volume of volumes">
+            *ngFor="let volume of volumes"
+            [volume]="volume">
         </volume>
     </mat-grid-list>
   `,
@@ -35,8 +36,10 @@ export class VolumeSearchComponent implements OnInit {
     }
 
     private search() {
-        this.volumeSer.getVolumes(this.query, (volumes) => {
-            this.volumes = volumes})
+        this.volumeSer.getVolumes(this.query, this.setVolumes.bind(this));
     }
 
+    private setVolumes(value: Volume[]) {
+        this.volumes = value;
+    }
 }

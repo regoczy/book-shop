@@ -19,22 +19,24 @@ export class VolumeService {
     public getVolumes(query: string, callback: (any) => any) {
         this.volumeDataSer.getVolumeDataArray(query).subscribe(
             (data: VolumeSearchResultData) => callback(
-                this.getVolumeArrayFromData(data)
+                this.getVolumeArrayFromData.bind(this)(data)
             )
         );
     }
 
     public getVolumeFromData(data: VolumeData): Volume {
-        return new Volume(
+        let volume: Volume = new Volume(
             data.id,
             data.volumeInfo.title,
             data.volumeInfo.authors,
             data.volumeInfo.description
-        );
+            );
+        return volume;
     }
 
     public getVolumeArrayFromData(data: VolumeSearchResultData): Volume[] {
-        return data.items.map(this.getVolumeFromData.bind(this));
+        let volumes: Volume[] = data.items.slice(0).map(this.getVolumeFromData.bind(this));
+        return volumes;
     }
 
 }
