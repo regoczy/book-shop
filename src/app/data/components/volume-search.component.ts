@@ -9,7 +9,7 @@ import { Volume } from 'src/app/models/volume.model';
         <div fxLayoutAlign="center center" style="height: 250px;">
             <search-field (search)="handleSearch($event)"></search-field>
         </div>
-        <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="16px grid">
+        <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="16px grid" fxFlexFill>
             <volume-card
                 *ngFor="let volume of volumes"
                 [volume]="volume">
