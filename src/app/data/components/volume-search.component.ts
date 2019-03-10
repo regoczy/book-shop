@@ -6,7 +6,7 @@ import { Volume } from 'src/app/models/volume.model';
   selector: 'volume-search',
   template: `
     <div fxLayout="column" fxLayoutAlign="center">
-        <div fxLayoutAlign="center center" style="height: 250px;">
+        <div fxLayoutAlign="center center" style="height: 200px;">
             <search-field (search)="handleSearch($event)"></search-field>
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="16px grid" fxFlexFill>
