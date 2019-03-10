@@ -1,10 +1,13 @@
+import { ImageLinks } from '../data/volume.data';
+
 export class Volume {
 
     constructor(
         private _id: string,
         private _title: string,
         private _authors: string[],
-        private _descr: string
+        private _descr: string,
+        private _imageLinks: ImageLinks
     ) { }
         
     get id(): string {
@@ -26,4 +29,9 @@ export class Volume {
     get descr(): string {
         return this._descr;
     }
+
+    get imageLinks(): ImageLinks {
+        return this._imageLinks;
+    }
+    
 }

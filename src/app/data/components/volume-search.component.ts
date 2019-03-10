@@ -5,18 +5,17 @@ import { Volume } from 'src/app/models/volume.model';
 @Component({
   selector: 'volume-search',
   template: `
-    <mat-form-field>
-        <input matInput placeholder="Keyword..."
-            [(ngModel)]="query"
-            (keyup.enter)="search()">
-    </mat-form-field>
-    <button mat-button (click)="search()">Search!</button>
-    <mat-grid-list cols="4">
-        <volume
-            *ngFor="let volume of volumes"
-            [volume]="volume">
-        </volume>
-    </mat-grid-list>
+    <div fxLayout="column" fxLayoutAlign="center">
+        <div fxLayoutAlign="center center" style="height: 250px;">
+            <search-field (search)="handleSearch($event)"></search-field>
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="16px grid">
+            <volume-card
+                *ngFor="let volume of volumes"
+                [volume]="volume">
+            </volume-card>
+        </div>
+    </div>
   `,
   styles: [`
     
@@ -24,8 +23,7 @@ import { Volume } from 'src/app/models/volume.model';
 })
 export class VolumeSearchComponent implements OnInit {
 
-    query: string;
-    volumes: Volume[]
+    volumes: Volume[] = [];
     
     constructor(private volumeSer: VolumeService) {
 
@@ -35,11 +33,23 @@ export class VolumeSearchComponent implements OnInit {
         
     }
 
-    private search() {
-        this.volumeSer.getVolumes(this.query, this.setVolumes.bind(this));
+    private handleSearch(search: { isMulti: boolean, query: string }) {
+        if (search.isMulti) {
+            this.volumes = [];
+            let queries: string[] = search.query.split(",").map(str => str = str.trim());
+            queries.forEach(query => {
+                this.volumeSer.getVolumes(query, this.addVolumes.bind(this));
+            });
+        } else {
+            this.volumeSer.getVolumes(search.query, this.setVolumes.bind(this));
+        }
     }
 
     private setVolumes(value: Volume[]) {
         this.volumes = value;
+    }
+
+    private addVolumes(values: Volume[]) {
+        this.volumes = this.volumes.concat(values);
     }
 }

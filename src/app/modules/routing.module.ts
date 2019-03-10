@@ -2,7 +2,7 @@ import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
 import { PageNotFoundComponent } from '../data/components/page-not-found.component';
 import { VolumeSearchComponent } from '../data/components/volume-search.component';
-import { VolumeComponent } from '../data/components/volume.components';
+import { VolumeCardComponent } from '../data/components/volume-card.components';
  
 const appRoutes: Routes = [
     {
@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'volume/:id',
-        component: VolumeComponent
+        component: VolumeCardComponent
     },
     {
         path: '**',

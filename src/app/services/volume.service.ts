@@ -10,13 +10,13 @@ export class VolumeService {
 
     constructor(private volumeDataSer: VolumeDataService) { }
 
-    public getVolume(id: string, callback: (any) => any) {
+    public getVolume(id: string, callback: (volume: Volume) => any) {
         this.volumeDataSer.getVolumeData(id).subscribe(
             (data: VolumeData) => callback(this.getVolumeFromData(data))
         );
     }
 
-    public getVolumes(query: string, callback: (any) => any) {
+    public getVolumes(query: string, callback: (volumes: Volume[]) => any) {
         this.volumeDataSer.getVolumeDataArray(query).subscribe(
             (data: VolumeSearchResultData) => callback(
                 this.getVolumeArrayFromData.bind(this)(data)
@@ -29,8 +29,9 @@ export class VolumeService {
             data.id,
             data.volumeInfo.title,
             data.volumeInfo.authors,
-            data.volumeInfo.description
-            );
+            data.volumeInfo.description,
+            data.volumeInfo.imageLinks);
+        console.log(data, volume);
         return volume;
     }
 

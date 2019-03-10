@@ -99,6 +99,10 @@ export interface Dimensions {
 export interface ImageLinks {
     smallThumbnail: string;
     thumbnail:      string;
+    small:          string | null;
+    medium:         string | null;
+    large:          string | null;
+    extraLarge:     string | null;
 }
 
 export interface IndustryIdentifier {
